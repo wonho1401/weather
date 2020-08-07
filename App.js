@@ -1,25 +1,21 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import Loading from "./Loading";
+import * as Location from "expo-location";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Fuck!</Text>
-      {/* <StatusBar style="auto" /> */}
-    </View>
-  );
+export default class App extends React.Component {
+  getLocation = async () => {
+    const location = Location.getCurrentPositionAsync(); //parameter option -> permission 해야함. 위치 받아오는 것.
+    console.log(location);
+  };
+
+  componentDidMount() {
+    this.getLocation();
+  }
+
+  render() {
+    return <Loading />;
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    color: "white",
-    fontSize: 24,
-  },
-});
+//항상 레이아웃을 flex로 짜도록 하자!
